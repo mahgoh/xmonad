@@ -1,0 +1,28 @@
+Config { overrideRedirect = False
+       , font     = "Iosevka 10"
+       , bgColor  = "#111111"
+       , fgColor  = "#aaaaaa"
+       , position = TopSize L 100 24
+       , lowerOnStart = True
+       , hideOnStart  = False
+       , allDesktops  = True
+       , commands = [ Run Cpu
+                        [ "-L", "3"
+                        , "-H", "50"
+                        , "--high"  , "red"
+                        , "--normal", "#a1e327"
+                        ] 10
+                    , Run Alsa "default" "Master"
+                        [ "--template", "<volumestatus>"
+                        , "--suffix"  , "True"
+                        , "--"
+                        , "--on", ""
+                        ]
+                    , Run Memory ["--template", "Mem: <usedratio>%"] 10
+                    , Run Date "%a %d.%m %H:%M:%S" "date" 10
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% | %date% "
+       }
